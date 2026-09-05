@@ -22,7 +22,14 @@ WB.views.games = (() => {
 
   function renderGrid() {
     const grid = document.getElementById('game-grid');
-    grid.innerHTML = games.map((g) => {
+    const gitCard = `
+      <div class="game-card glass" data-act-entry="git">
+        <div class="game-art">🐙</div>
+        <div class="game-name">Git 学习</div>
+        <div class="game-desc">学学版本管理 · 启动 Git Bash / 常用命令速查</div>
+        <button class="btn btn-primary-soft btn-mini" data-act="git">开始学习</button>
+      </div>`;
+    grid.innerHTML = gitCard + games.map((g) => {
       const best = g.best != null ? `<span class="game-best">🏆 最高分 ${g.best}</span>` : '';
       return `
       <div class="game-card glass" data-id="${g.id}">
@@ -36,6 +43,9 @@ WB.views.games = (() => {
     grid.querySelectorAll('[data-act="play"]').forEach((btn) => {
       const g = games.find((x) => x.id === btn.closest('.game-card').dataset.id);
       if (g) btn.addEventListener('click', () => play(g));
+    });
+    grid.querySelectorAll('[data-act="git"]').forEach((btn) => {
+      btn.addEventListener('click', () => { if (WB.nav) WB.nav('git'); });
     });
   }
 
