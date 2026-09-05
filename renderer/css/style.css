@@ -1234,3 +1234,10 @@ body { background: #000; }
 .p-ver-badge { background: #123; color: #7cc4ff; padding: 2px 12px; border-radius: 99px; font-size: 13px; font-weight: 700; }
 .p-preview-sub { font-size: 12px; color: #7d8794; margin-bottom: 18px; }
 .p-thanks { margin-top: 18px; font-size: 12px; color: #7d8794; line-height: 1.7; }
+
+/* 个人页 v3：黑色卡片居中，不再整屏变黑（保留 UI 图背景在四周） */
+#view-about .profile-dark {
+  background: #0b0b0d; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px; margin: 18px auto; padding: 32px 40px;
+  max-width: 1040px; min-height: 0;
+}
