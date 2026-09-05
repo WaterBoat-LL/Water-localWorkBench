@@ -1070,7 +1070,7 @@ body { background: #000; }
 /* 背景：UI 图 + 鼠标视差 */
 .bg-parallax {
   position: fixed; inset: 0; z-index: -2;
-  background-image: url('assets/bg-ui.jpg');
+  background-image: url('../assets/bg-ui.jpg');
   background-size: cover; background-position: center;
   transform: scale(1.12);
   transition: transform 0.12s ease-out;
