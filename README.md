@@ -1,74 +1,71 @@
 # 🐋 鲸屿工作台 (Ocean Workbench)
 
-**DeepSeek 鲸鱼娘的海洋风本地桌面工作台** —— 由主人 WaterBoat-LL 与鲸鱼娘共同打造。
+**DeepSeek 鲸鱼娘的本地桌面工作台** —— 由主人 WaterBoat-LL 与鲸鱼娘共同打造。
 
 ## ✨ 功能一览
 
 | 模块 | 说明 |
 |------|------|
-| 🫧 首页 | 概览仪表盘：余额状态、今日待办、笔记/网址统计、每日一言 |
-| 💰 API 余额 | 动态查询 DeepSeek / OpenAI / OpenRouter / 通用兼容(中转站) 余额，主进程代理请求无 CORS，支持自动刷新 |
-| 📝 每日备忘录 | 自定义日历选日期，新建/编辑/删除备忘，带完成勾选与农历显示 |
-| 🔗 课业网址 | 多分类快捷入口，自定义 emoji 图标，一键系统浏览器打开 |
-| 🗂️ 项目笔记 | 记录项目经历，支持标签与最多 6 张图片（本地存储） |
-| 🧰 常用工具 | 透明底色擦除器、小型计算机，支持自定义网页工具 |
-| 🎮 游戏栏 | 接珍珠、猜鲸鱼想的数、海底记忆翻翻乐、石头剪刀布 vs 鲸鱼娘 |
-| 🐋 ABOUT ME | 鲸鱼娘人设卡、主人自我介绍（可编辑）、版本预览与更新日志 |
+| 🔐 本地账号系统 | 全黑登录框，多账号切换，头像可上传 |
+| 🫧 首页 | 概览仪表盘 |
+| 💰 API 余额 | 查询 DeepSeek / Moonshot / 硅基流动 / 通义千问 / OpenAI / OpenRouter / 通用兼容 余额，主进程代理无 CORS，支持自动刷新 |
+| 📝 每日备忘录 | 日历选日期 + 新建/编辑/删除 + 农历 |
+| 📅 课表 | CSV 导入 / 粘贴 / 手动添加，卡牌式按星期排列，支持 UTF-8 / GBK |
+| 🔗 课业网址 | 多分类快捷入口，一键系统浏览器打开 |
+| 🗂️ 项目笔记 | 记录项目经历，标签 + 图片 |
+| 🧰 常用工具 | 透明底色擦除器、小型计算机、**AI 生成 PPT**（DeepSeek 扩写 + dsh-ppt 渲染） |
+| 🎮 游戏栏 | 接珍珠 / 猜数 / 翻翻乐 / 石头剪刀布，并收录 **Git 学习**（启动 Git Bash、身份配置、命令速查） |
+| 🐋 个人主页 | change 风格深色个人页（大头像 + 名字 + 今日版本迭代预览），背景纯黑 |
 
-## 🖥️ 技术框架（重点！）
+## 🎨 UI 特点（v2.0）
 
-```
-┌─────────────────────────────────────────────────┐
-│  Electron 33（桌面壳）                           │
-│  ├── main.js          主进程                     │
-│  │   ├── 窗口管理（1280×820 原生窗口）           │
-│  │   ├── 本地 JSON 存储（data/*.json）           │
-│  │   ├── API 余额代理（Node https，无 CORS）     │
-│  │   └── local:// 协议（笔记图片本地展示）       │
-│  ├── preload.js       安全桥（contextBridge）    │
-│  └── renderer/        渲染进程（纯前端）          │
-│      ├── index.html   单页应用                   │
-│      ├── css/style.css  海洋风主题（玻璃拟态）    │
-│      └── js/
-│          ├── bg3d.js   Three.js 3D 海底背景      │
-│          │             （气泡/光柱/水母/鱼群）    │
-│          ├── bg.js     Canvas 2D 回退背景        │
-│          ├── api.js    数据层                    │
-│          └── views/    各功能模块                │
-└─────────────────────────────────────────────────┘
-```
+- **背景**：自定义 UI 图 + 鼠标视差滑动（已移除 3D 水母动画）
+- **顶栏**：无白条框架，圆球悬停高亮，左上角为当前用户头像
+- **交互**：切换功能时「灭屏 → 亮屏」过渡（1s 内）
 
-- **桌面壳**：Electron 33（Chromium + Node），真正的桌面应用，双击运行，不是网页渲染
-- **前端**：原生 HTML / CSS / JavaScript（无框架依赖，轻量好改）
-- **3D 背景**：Three.js r128（已打包到 `renderer/vendor/`，**离线可用**），自动回退 2D Canvas 海底动画
-- **数据存储**：本地 JSON 文件（`data/` 目录），图片存 `data/uploads/`
-- **API 余额**：主进程用 Node https 请求，绕过浏览器 CORS；支持 4 种平台
+## 🖥️ 技术框架
+
+- **桌面壳**：Electron 33（Chromium + Node），原生桌面应用
+- **前端**：原生 HTML / CSS / JavaScript，无框架依赖
+- **数据存储**：本地 JSON（`data/`），图片存 `data/uploads/`
 - **安全**：contextIsolation 开启、无 nodeIntegration、外链走系统浏览器
+- **版本管理**：本地 Git 仓库（见下）
 
 ## 🚀 运行方法
 
 ```bash
 cd 本地工作台
-npm start        # 启动桌面应用
+npm install                              # 首次
+npm start                                # 启动桌面应用
 ```
 
-> 需要先安装依赖：`npm install`（首次安装若网络不佳，可加 `--registry=https://registry.npmmirror.com`）
+## 🐙 Git 仓库
 
-## 📂 数据文件
+项目已初始化为本地 git 仓库（分支 `main`）。`.gitignore` 已排除：
+
+- `node_modules/`、`.npm-cache/` —— 依赖
+- `data/` —— **API 密钥、密码哈希、上传图片等隐私，仅本地，不进仓库**
+- `picture_station/` —— 个人素材
+- `*.log`、`*.tmp`、`probe-*.js`
+
+提交 / 推送：
+
+```bash
+git add .
+git commit -m "改了什么"
+git remote add origin https://github.com/<你的用户名>/<仓库名>.git   # 首次
+git push -u origin main
+```
+
+> 因为 `data/` 等已排除，推送到公开仓库是安全的（不含任何密钥）。
+
+## 📂 数据文件（全部本地，不进 git）
 
 | 文件 | 内容 |
 |------|------|
-| `data/config.json` | API 账号（含 Key，仅本地）、自动刷新间隔、自我介绍 |
-| `data/memos.json` | 每日备忘录 |
-| `data/links.json` | 课业网址 |
-| `data/notes.json` | 项目笔记（图片存 `data/uploads/`） |
-| `data/tools.json` | 常用工具 |
-| `data/games.json` | 游戏与最高分 |
+| `data/config.json` | API 账号（含 Key，仅本地）、自动刷新、自我介绍 |
+| `data/users.json` | 本地账号（密码为加盐哈希） |
+| `data/session.json` | 当前登录用户 |
+| `data/*.json` | 备忘录 / 课表 / 网址 / 笔记 / 工具 / 游戏 |
 
-## 🐳 小贴士
-
-- API Key 只存在本地 `data/config.json`，请勿把该文件分享给他人
-- 余额查询走 DeepSeek 官方 `/user/balance` 等接口，中转站可在「通用兼容」里填自己的 baseUrl
-- 3D 背景若想更密集/更稀疏，可自行调整 `js/bg3d.js` 中的粒子数量
-
-**版本 1.0.0** —— 首发版。💙 主人和鲸鱼娘的第一个正经项目，以后也会继续长大！
+**版本 2.0.0** —— 个人化改版：账号系统 + 视差背景 + 深色个人主页 + Git 版本管理。💙 主人和鲸鱼娘的第一个正经项目，继续长大中！
