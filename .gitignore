@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+.npm-cache/
+
+# 本地数据（含 API 密钥、session、上传图片）——只留本地，不进仓库
+data/
+
+# 用户图片素材区（设计图等大文件）
+picture_station/
+
+# 日志/临时
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# 调试/探测脚本
+probe-*.js
+
+# 构建产物
+dist/
+out/

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: local: blob:; font-src 'self' data:; connect-src 'self'" />
+  <title>鲸屿工作台</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ======== 启动画面（版本预览） ======== -->
+  <div id="splash" class="splash">
+    <div class="splash-bubble"></div>
+    <div class="splash-logo"><img src="assets/whale.png" alt="鲸鱼娘" /></div>
+    <h1 class="splash-title">starter workstation</h1>
+    <p class="splash-version">v<span id="splash-ver">1.1.0</span> · Ocean Workbench</p>
+    <div class="splash-wave"></div>
+  </div>
+
+  <!-- ======== 背景：UI 图 + 鼠标视差 ======== -->
+  <div id="bg-parallax" class="bg-parallax"></div>
+
+  <!-- ======== 顶部导航栏：用户头像 + 圆球栏目条 ======== -->
+  <header class="topnav">
+    <div class="brand">
+      <div class="user-avatar" id="user-avatar" title="我的账号"><span class="ua-letter">?</span></div>
+      <span class="brand-name" id="brand-name">Workbench</span>
+      <div class="user-menu" id="user-menu" hidden></div>
+    </div>
+
+    <nav class="ball-strip" id="ball-nav">
+      <button class="ball" data-view="home" title="首页"><span class="ball-ico">🫧</span><span class="ball-label">首页</span></button>
+      <button class="ball" data-view="balance" title="API 余额"><span class="ball-ico">💰</span><span class="ball-label">余额</span></button>
+      <button class="ball" data-view="memo" title="每日备忘录"><span class="ball-ico">📝</span><span class="ball-label">备忘</span></button>
+      <button class="ball" data-view="schedule" title="课表"><span class="ball-ico">📅</span><span class="ball-label">课表</span></button>
+      <button class="ball" data-view="links" title="课业网址"><span class="ball-ico">🔗</span><span class="ball-label">网址</span></button>
+      <button class="ball" data-view="notes" title="项目笔记"><span class="ball-ico">🗂️</span><span class="ball-label">项目</span></button>
+      <button class="ball" data-view="tools" title="常用工具"><span class="ball-ico">🧰</span><span class="ball-label">工具</span></button>
+      <button class="ball" data-view="git" title="Git 学习"><span class="ball-ico">🐙</span><span class="ball-label">Git</span></button>
+      <button class="ball" data-view="games" title="游戏栏"><span class="ball-ico">🎮</span><span class="ball-label">游戏</span></button>
+      <button class="ball" data-view="about" title="ABOUT ME"><span class="ball-ico">🐋</span><span class="ball-label">个人</span></button>
+    </nav>
+
+    <div class="topnav-meta">
+      <div class="topnav-clock" id="foot-clock">--:--:--</div>
+      <div class="topnav-ver">v<span id="side-ver">1.1.0</span></div>
+    </div>
+  </header>
+
+  <!-- ======== 主内容区（单根垂直滚动条） ======== -->
+  <main class="content" id="content">
+    <!-- 各视图容器由 JS 渲染（v-show 式高亮切换） -->
+    <section id="view-home" class="view"></section>
+    <section id="view-balance" class="view"></section>
+    <section id="view-memo" class="view"></section>
+    <section id="view-schedule" class="view"></section>
+    <section id="view-links" class="view"></section>
+    <section id="view-notes" class="view"></section>
+    <section id="view-tools" class="view"></section>
+    <section id="view-git" class="view"></section>
+    <section id="view-games" class="view"></section>
+    <section id="view-about" class="view"></section>
+  </main>
+
+  <!-- ======== 全局弹窗 ======== -->
+  <div id="modal-root"></div>
+  <div id="toast-root"></div>
+
+  <!-- ======== 屏幕过渡（切换功能时灭屏→亮屏） ======== -->
+  <div id="screen-fade" class="screen-fade"></div>
+
+  <!-- ======== 登录界面（全黑） ======== -->
+  <div id="login-root" class="login-root"></div>
+
+  <!-- 脚本（普通 script，非 module，兼容 file://） -->
+  <script src="js/util.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/views/balance.js"></script>
+  <script src="js/views/memo.js"></script>
+  <script src="js/views/links.js"></script>
+  <script src="js/views/schedule.js"></script>
+  <script src="js/views/notes.js"></script>
+  <script src="js/views/tools.js"></script>
+  <script src="js/views/git.js"></script>
+  <script src="js/views/games.js"></script>
+  <script src="js/views/about.js"></script>
+  <script src="js/views/home.js"></script>
+  <script src="js/ppt-maker.js"></script>
+  <script src="js/user-login.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

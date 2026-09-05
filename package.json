@@ -1,0 +1,30 @@
+{
+  "name": "ocean-workbench",
+  "productName": "鲸屿工作台",
+  "version": "2.0.0",
+  "description": "DeepSeek 鲸鱼娘的海洋风本地桌面工作台",
+  "main": "main.js",
+  "author": "WaterBoat-LL & 鲸鱼娘",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0"
+  },
+  "build": {
+    "appId": "com.whalegirl.workbench",
+    "productName": "鲸屿工作台",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "data/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "portable"
+    }
+  }
+}
