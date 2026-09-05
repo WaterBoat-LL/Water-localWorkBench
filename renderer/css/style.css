@@ -1212,3 +1212,25 @@ body { background: #000; }
 .ver-tech { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 12px; color: #7d8794; }
 .changelog { max-height: 420px; overflow-y: auto; }
 .about-thanks { font-size: 13px; color: #aab3bf; line-height: 1.8; }
+
+/* 个人页 v2 精修：纯黑铺满 + 三七开 + 大头像居中 */
+#view-about .profile-dark {
+  background: #000; border: none; border-radius: 0; margin: 0;
+  padding: 36px 44px; min-height: calc(100vh - 90px);
+}
+.p-profile { grid-template-columns: 3fr 7fr !important; gap: 48px; }
+.p-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.p-avatar { width: 220px; height: 220px; margin: 0 0 18px; border-radius: 50%;
+  border: 2px solid rgba(120, 200, 255, 0.35); background: #0d1424;
+  display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.p-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.p-avatar .ua-letter { font-size: 70px; color: #bfe3ff; font-weight: 800; }
+.p-name { font-size: 28px; font-weight: 800; }
+.p-handle { margin: 4px 0 14px; font-size: 13px; color: rgba(232,237,243,0.5); }
+.p-bio { font-size: 13px; color: #aab3bf; line-height: 1.7; margin-bottom: 16px; max-width: 260px; }
+.p-right { min-width: 0; }
+.p-preview-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.p-preview-title { font-size: 16px; font-weight: 800; margin: 0; color: #e8edf3; }
+.p-ver-badge { background: #123; color: #7cc4ff; padding: 2px 12px; border-radius: 99px; font-size: 13px; font-weight: 700; }
+.p-preview-sub { font-size: 12px; color: #7d8794; margin-bottom: 18px; }
+.p-thanks { margin-top: 18px; font-size: 12px; color: #7d8794; line-height: 1.7; }
